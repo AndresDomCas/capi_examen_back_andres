@@ -14,11 +14,15 @@ return new class extends Migration
     public function up()
     {
         //
-        $table->id();
-        $table->integer('numero_exterior');
-        $table->string('colonia');
-        $table->integer('cp', 5);
-        $table->string('ciudad');
+        Schema::create('user_domicilio', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('numero_exterior');
+            $table->string('colonia');
+            $table->integer('cp', 5);
+            $table->string('ciudad');
+            $table->timestamps();
+        });
     }
 
     /**
